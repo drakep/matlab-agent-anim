@@ -1,0 +1,29 @@
+function [Danger,Distro] = rules(Distro,Danger)
+%Danger = zeros(1,numel(Distro(:,1)));%9 ways to move, choose one
+Moves = move();
+looopz = numel(Distro(:,1));
+for j = 1:looopz
+    if j > looopz
+        break
+    end
+TR = numel(Distro(:,1));
+b = 1;
+a = 9;
+looopz = numel(Distro(:,1));
+Danger = ReTestDist(Distro);
+if Danger(j) == 1
+    [~,Distro] = Jeopardy(Distro,j);
+    Danger = ReTestDist(Distro);
+else
+    [a,b] = EdgeTest(Distro,j);
+    k = randint(1,1,[1 a]);
+    A = Distro(j,:);
+    A(1,1) = A(1,1) + Moves(1,k,b);
+    A(1,2) = A(1,2) + Moves(2,k,b);
+    I = TestDist(j,Distro,A);
+    Danger(j) = I;
+    Distro(j,:) = A;
+end
+Danger = ReTestDist(Distro);
+looopz = numel(Distro(:,1));
+end

@@ -1,0 +1,11 @@
+count = 1;
+for j = 1:N
+    for k = 1:N
+        if A(j,k) ==1
+            C(count,1) = j;
+            C(count,2) = k;
+            count = count + 1;
+        end
+    end
+end
+for j = 1:numel(C(:,1)
